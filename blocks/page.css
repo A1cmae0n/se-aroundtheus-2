@@ -1,41 +1,41 @@
 .page {
-    background: #000;
-    color: #FFF;
+  background: #000;
+  color: #fff;
 }
 
 .page__section {
-    width: 100%;
-    max-width: 880px; 
-    position: relative; 
-    margin: 0 auto;
+  width: 100%;
+  max-width: 880px;
+  position: relative;
+  margin: 0 auto;
 }
 
 .page__content {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: black;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @media screen and (min-width: 320px) and (max-width: 581px) {
-    .page__section {
-        max-width: 282px;
-    }
+  .page__section {
+    max-width: 282px;
+  }
 }
 
 @media screen and (min-width: 581px) and (max-width: 881px) {
-/* @media screen and (min-width: 581px) and (max-width: 1280px) { */
-    .page__section {
-        margin: 0 20px; 
-        max-width: 580px;
-        margin: 0 auto;
-    }
+  /* @media screen and (min-width: 581px) and (max-width: 1280px) { */
+  .page__section {
+    margin: 0 20px;
+    max-width: 580px;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (min-width: 882px) {
-    .page__section {
-        /* margin: 0 200px auto; */
-    }
-}  
+  .page__section {
+    /* margin: 0 200px auto; */
+  }
+}

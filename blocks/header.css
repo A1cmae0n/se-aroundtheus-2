@@ -1,29 +1,29 @@
 .header {
-    padding-top: 45px;
+  padding-top: 45px;
 }
 
 .header::after {
-    content:'';
-    display: inline-block;
-    width: 100%;
-    opacity: 70%;
-    height: 2px;
-    background-color: #545454;
-    margin-bottom: 36.25px; 
+  content: "";
+  display: inline-block;
+  width: 100%;
+  opacity: 70%;
+  height: 2px;
+  background-color: #545454;
+  margin-bottom: 36.25px;
 }
 
 .header__logo {
-    margin-bottom: 41px;
+  margin-bottom: 41px;
 }
 @media screen and (max-width: 480px) {
-    .header__logo {
-        height: 24px;
-        width: 126px;
-        margin-left: 7px;
-        margin-top: 28px;
-        margin-bottom: 32px;
-    }
-    .header {
-        padding-top: 0px;
-    }
+  .header__logo {
+    height: 24px;
+    width: 126px;
+    margin-left: 7px;
+    margin-top: 28px;
+    margin-bottom: 32px;
+  }
+  .header {
+    padding-top: 0px;
+  }
 }
