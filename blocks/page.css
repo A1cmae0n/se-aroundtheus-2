@@ -19,13 +19,14 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-@media only screen and (max-width: 581px) {
+@media screen and (min-width: 320px) and (max-width: 581px) {
     .page__section {
         max-width: 282px;
     }
 }
 
 @media screen and (min-width: 581px) and (max-width: 881px) {
+/* @media screen and (min-width: 581px) and (max-width: 1280px) { */
     .page__section {
         margin: 0 20px; 
         max-width: 580px;
@@ -33,9 +34,8 @@
     }
 }
 
-/* @media only screen and (min-width: 882px) {
+@media screen and (min-width: 882px) {
     .page__section {
-        margin: 0 20px;
-        margin: 0 auto;
+        /* margin: 0 200px auto; */
     }
-} */
+}  
