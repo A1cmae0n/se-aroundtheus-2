@@ -25,6 +25,7 @@ const initialCards = [
     }
 ];
 
+// Populate page with cards
 const cardList = document.querySelector(".cards__list");
 
 initialCards.forEach((cardObj) => {
@@ -33,36 +34,83 @@ initialCards.forEach((cardObj) => {
 });
 
 function getCardElement(data) {
-    // select card <li> from template 
+    // Get card template 
     const cardTemplate = document.querySelector("#card-template").content;
     const card = cardTemplate.querySelector(".card").cloneNode(true);
 
-    // image src and alt 
+    // Fill w/ image src and alt 
     const cardImage = card.querySelector(".card__image");
     cardImage.setAttribute("src", data.link);
     cardImage.setAttribute("alt", `Photo of ${data.name}`);
 
-    // h2 location text
+    // Fill h2 w/ location text
     const cardDescription = card.querySelector(".card__description");
     cardDescription.querySelector(".card__title").textContent = data.name; 
   
     return card;
 }
-  
+// END Populate 
+
 
 /*--------------------------------------------------------------*/
 /*                       Elements                               */
 /*--------------------------------------------------------------*/
 
-// const profileEditButton = document.querySelector("#profile-edit-button");
-//const profileEditButton = document.querySelector(".profile__edit-button");
-// const profileEditModal = document.querySelector("#profile-edit-modal");
-// const profileEditCloseButton = profileEditModal.querySelector(".modal__close");
-// const profileName = document.querySelector(".profile__title js-pro");
+const modalCloseButton = document.querySelector(".modal__close");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const profileAddButton = document.querySelector(".profile__add-button");
 
-// profileEditButton.addEventListener("click", () => {
-//     profileEditModal.classList.add("modal_opened");
-// });
+const profileEditSaveButton = document.querySelector(".modal__edit-save-button");
+/*--------------------------------------------------------------*/
+/*                       Methods                               */
+/*--------------------------------------------------------------*/
+
+// find the form in the DOM
+const formElement = document.querySelector(".modal__form");
+
+// find the form fields in the DOM
+const nameInput = document.querySelector(".modal__title-edit ");
+const jobInput = document.querySelector(".modal__description-edit ");
+
+// find the profile elements in the DOM
+const profileName = document.querySelector(".profile__title");
+const profileJob =  document.querySelector(".profile__description");
+
+// Fill out default values
+nameInput.value = profileName.innerText;
+jobInput.value = profileJob.innerText;
+
+// the form submission handler.
+function handleProfileFormSubmit(evt) {
+    evt.preventDefault();
+    // get the values of each field from the value property 
+    // of the corresponding input element
+    const newUserName = nameInput.value;
+    const newUserDescription = jobInput.value;
+    // insert new values into the textContent property of the 
+    // corresponding profile elements
+    profileName.textContent = newUserName;
+    profileJob.textContent = newUserDescription;
+}
+
+// connect the handler to the form:
+// it will watch the submit event
+formElement.addEventListener('submit', handleProfileFormSubmit); 
+
+profileEditButton.addEventListener("click", () => {
+    // profileEditModal.classList.add("modal_opened");
+    const modal = document.querySelector(".modal")
+    modal.classList.add("modal__opened");
+});
+
+profileAddButton.addEventListener("click", () => {
+
+});
+
+modalCloseButton.addEventListener("click", () => {
+    const modal = document.querySelector(".modal");
+    modal.classList.remove("modal__opened");
+});
 
 // profileEditCloseButton.addEventListener("click", () => {
 //     profileEditModal.classList.remove("modal_opened");
