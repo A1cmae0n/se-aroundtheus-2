@@ -38,7 +38,7 @@
     /* margin-top: 28.79px; */
 }
 
-.modal__close {
+.modal__close-button {
     border: none;
     background-color: rgba(0,0,0,0);
     position: absolute;
@@ -87,7 +87,7 @@
     margin-top: 14px;
 }
 
-.modal__edit-save-button {
+.modal__save-button {
     background-color: black;
     color: white;
     font-family: 'Inter', Arial, sans-serif;
@@ -99,8 +99,12 @@
     width: 100%;
 }
 
+.modal__save-button:hover {
+    opacity: 60%;
+  }
+
 @media screen and (max-width: 1100px) {
-    .modal__close {
+    .modal__close-button {
         left: calc(100% - 45pxa);
     }
 

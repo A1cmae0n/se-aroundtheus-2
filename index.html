@@ -46,9 +46,9 @@
       <div class="popup popup_type_image"></div>
     </div>
 
-    <div class="modal">
+    <div class="modal modal__edit-profile">
         <div class="modal__container">
-            <button class="modal__close"></button>
+            <button class="modal__close-button" id="modal__edit-profile-close"></button>
             <h3 class="modal__heading">Edit Profile</h3>
                 <form class="modal__form" action="#" name="form" id="editProfile">
                     <fieldset class="modal__fieldset">
@@ -70,11 +70,43 @@
                         />
                     </fieldset>
                     <fieldset class="modal__fieldset">
-                        <button type="submit" class="modal__edit-save-button">Save</button>
+                        <button type="submit" class="modal__save-button" id="modal__edit-profile-close">Save</button>
                     </fieldset>
                 </form>
         </div>
     </div>
+
+    <div class="modal modal__new-location">
+      <div class="modal__container">
+          <button class="modal__close-button" id="modal__new-location-close"></button>
+          <h3 class="modal__heading">New Place</h3>
+              <form class="modal__form" action="#" name="form" id="newLocation">
+                  <fieldset class="modal__fieldset">
+                      <input
+                          type="text"
+                          class="modal__input modal__title-edit"
+                          id="new-location"
+                          name="new-location"
+                          placeholder="Title"
+                          required
+                      />
+                      <input
+                          type="text"
+                          class="modal__input modal__description-edit"
+                          id="new-image"
+                          name="new-image"
+                          placeholder="Image URL"
+                          required
+                      />
+                  </fieldset>
+                  <fieldset class="modal__fieldset">
+                      <button type="submit" class="modal__save-button">Save</button>
+                  </fieldset>
+              </form>
+      </div>
+  </div>
+
+
     <template id="card-template">
         <li class="card">
         <img
@@ -82,6 +114,8 @@
             src=""
             alt=""
         >
+        <button class="card__trash-lid"></button>
+        <button class="card__trash-bin"></button>
         <div class="card__description">
             <h2 class="card__title"></h2>
             <button class="card__like-button" type="button"></button>
