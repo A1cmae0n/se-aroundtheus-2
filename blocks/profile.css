@@ -23,7 +23,7 @@
   margin-left: 18px;
 }
 
-.profile__add-button {
+.profile__add-location-button {
   background: transparent url(../images/add-icon.svg) center no-repeat;
   height: 50px;
   width: 150px;
@@ -33,7 +33,7 @@
   max-width: 282px;
 }
 
-.profile__add-button:hover {
+.profile__add-location-button:hover {
   opacity: 50%;
 }
 
@@ -85,7 +85,7 @@
     text-align: center;
     font-size: 14px;
   }
-  .profile__add-button {
+  .profile__add-location-button {
     margin: 0;
     margin-top: 36px;
     margin-bottom: 25px;
@@ -111,7 +111,7 @@
 
 /* Mobile */
 @media screen and (max-width: 480px) {
-  .profile__add-button {
+  .profile__add-location-button {
     margin-top: 36px;
   }
 

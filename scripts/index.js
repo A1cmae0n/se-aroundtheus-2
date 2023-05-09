@@ -36,20 +36,20 @@ const profileName = document.querySelector(".profile__title");
 const profileJob =  document.querySelector(".profile__description");
 
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileAddButton = document.querySelector(".profile__add-button");
+const profileAddLocationButton = document.querySelector(".profile__add-location-button");
 
 // const profileEditSaveButton = document.querySelector(".modal__save-button");
 // fields in the edit profile form
 const nameInput = document.getElementById("name");
 const jobInput = document.getElementById("description");
 
-const newLocation = document.getElementById("new-location");
-const newImageUrl = document.getElementById("new-image");
+const modalCloseButtons = document.querySelectorAll(".modal__close-button");
+const closeImageModal = document.querySelectorAll(".modal__image-close");
 
-const modalCloseButton = document.querySelector(".modal__close-button");
 
 populateCards();
 populateEditForm();
+addCloseButtonEvents();
 
 editProfileForm.addEventListener('submit', handleEditProfileSubmit);
 newLocationForm.addEventListener('submit', handleNewLocationSubmit);
@@ -60,13 +60,11 @@ profileEditButton.addEventListener("click", () => {
     // profileEditModal.classList.add("modal_opened");
     const modal = document.querySelector(".modal__edit-profile");
     modal.classList.add("modal__opened");
-    addModalCloseButtonEvent("#modal__edit-profile-close"); 
-});
+}); 
 
-profileAddButton.addEventListener("click", () => {
+profileAddLocationButton.addEventListener("click", () => {
     const modal = document.querySelector(".modal__new-location");
     modal.classList.add("modal__opened");
-    addModalCloseButtonEvent("#modal__new-location-close");   
 });
 
 /*--------------------------------------------------------------*/
@@ -153,6 +151,7 @@ function handleEditProfileSubmit(evt) {
     profileName.textContent = newUserName;
     profileJob.textContent = newUserDescription;
 
+    // close window on submit
     const modal = evt.target.closest('.modal');
     modal.classList.remove("modal__opened");
 }
@@ -160,26 +159,56 @@ function handleEditProfileSubmit(evt) {
 function handleNewLocationSubmit(evt) {
     evt.preventDefault();
 
-    const location = newLocation.value;
-    const url = newImageUrl.value;
+    const newLocation = document.getElementById("new-location");
+    const newImageUrl = document.getElementById("new-image");
 
     const data = {
         name: newLocation.value,
         link: newImageUrl.value
     }
-
+    // create & prepend new card 
     const newCard = getCardElement(data);
     cardList.prepend(newCard);
 
+    // close window on submit
     const modal = evt.target.closest('.modal');
-    modal.classList.remove("modal__opened");q
+    modal.classList.remove("modal__opened");
 }
 
-
-function addModalCloseButtonEvent(closeButtonId) {
-    const closeButton = document.querySelector(closeButtonId);
-    closeButton.addEventListener("click", () => {
-        closeButton.closest(".modal").classList.remove("modal__opened");
-    });   
+function addCloseButtonEvents() {
+    modalCloseButtons.forEach((closeButton) => {
+        const modal = closeButton.closest(".modal");
+        closeButton.addEventListener("click", () => {
+            close(modal);
+        });   
+    });
+    closeImageModal.forEach((closeButton) => {
+        const modal = closeButton.closest(".modal");
+        closeButton.addEventListener("click", () => {
+            close(modal);
+        });   
+    });
 }
 
+function close(modal) {
+    modal.classList.remove("modal__opened");
+}
+
+function addImageEventListeners() {
+    const images = document.querySelectorAll(".card__image");
+    images.forEach(image => {
+        const src = image.src;
+        image.addEventListener("click", () => {
+            renderOpenImageModal(src);
+        });
+    });
+}
+
+function renderOpenImageModal(src) {
+    const imageModal = document.querySelector(".modal-image");
+    const clickedImage = imageModal.querySelector(".modal__img");
+    clickedImage.setAttribute("src", src);
+    imageModal.classList.add("modal__opened");
+}
+
+addImageEventListeners();
