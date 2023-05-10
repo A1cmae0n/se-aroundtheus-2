@@ -38,38 +38,17 @@ const profileJob =  document.querySelector(".profile__description");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileAddLocationButton = document.querySelector(".profile__add-location-button");
 
-// const profileEditSaveButton = document.querySelector(".modal__save-button");
-// fields in the edit profile form
 const nameInput = document.getElementById("name");
 const jobInput = document.getElementById("description");
 
 const modalCloseButtons = document.querySelectorAll(".modal__close-button");
 const closeImageModal = document.querySelectorAll(".modal__image-close");
 
-
+/*--------------------------------------------------------------*/
+/*                       Cards                                  */
+/*--------------------------------------------------------------*/
 populateCards();
-populateEditForm();
-addCloseButtonEvents();
 
-editProfileForm.addEventListener('submit', handleEditProfileSubmit);
-newLocationForm.addEventListener('submit', handleNewLocationSubmit);
-
-// connect the handler to the form to watch the submit event
-
-profileEditButton.addEventListener("click", () => {
-    // profileEditModal.classList.add("modal_opened");
-    const modal = document.querySelector(".modal__edit-profile");
-    modal.classList.add("modal__opened");
-}); 
-
-profileAddLocationButton.addEventListener("click", () => {
-    const modal = document.querySelector(".modal__new-location");
-    modal.classList.add("modal__opened");
-});
-
-/*--------------------------------------------------------------*/
-/*                       Methods                               */
-/*--------------------------------------------------------------*/
 function populateCards() {
     initialCards.forEach((cardObj) => {
         const card = getCardElement(cardObj);
@@ -77,8 +56,9 @@ function populateCards() {
     });    
 }
 
+// Auxiliary method for the above
 function getCardElement(data) {
-    // Get card template 
+    // Get card template and add event listeners 
     const cardTemplate = document.querySelector("#card-template").content;
     const card = cardTemplate.querySelector(".card").cloneNode(true);
 
@@ -90,6 +70,18 @@ function getCardElement(data) {
     return card;
 }
 
+// Auxiliary methods 
+// Fill w/ image src and alt 
+function loadCardImage(card, data) {
+    const cardImage = card.querySelector(".card__image");
+    cardImage.setAttribute("src", data.link);
+    cardImage.setAttribute("alt", `Photo of ${data.name}`);
+}
+// Fill h2 w/ location text
+function loadLocationData(card, data) {
+    const cardDescription = card.querySelector(".card__description");
+    cardDescription.querySelector(".card__title").textContent = data.name; 
+}
 // add functionality to like button
 function clickLikeButton(card) {
     const likeButton = card.querySelector(".card__like-button");
@@ -104,20 +96,6 @@ function clickLikeButton(card) {
         }
     });
 }
-
-// Fill w/ image src and alt 
-function loadCardImage(card, data) {
-    const cardImage = card.querySelector(".card__image");
-    cardImage.setAttribute("src", data.link);
-    cardImage.setAttribute("alt", `Photo of ${data.name}`);
-}
-
-// Fill h2 w/ location text
-function loadLocationData(card, data) {
-    const cardDescription = card.querySelector(".card__description");
-    cardDescription.querySelector(".card__title").textContent = data.name; 
-}
-
 // add event listener to trash lid/bin to remove card
 function trashCan(card) {
     const trashLid = card.querySelector(".card__trash-lid");
@@ -131,6 +109,38 @@ function trashCan(card) {
         evt.target.closest(".card").remove()
     }); 
 }
+
+/*--------------------------------------------------------------*/
+/*                         Modals                               */
+/*--------------------------------------------------------------*/
+addCloseButtonEvents();
+
+function addCloseButtonEvents() {
+    modalCloseButtons.forEach((closeButton) => {
+        const modal = closeButton.closest(".modal");
+        closeButton.addEventListener("click", () => {
+            close(modal);
+        });   
+    });
+    // The image popups have their own close button 
+    // The regular modalCloseButtons styles conflict with their formatting
+    closeImageModal.forEach((closeButton) => {
+        const modal = closeButton.closest(".modal");
+        closeButton.addEventListener("click", () => {
+            close(modal);
+        });   
+    });
+}
+
+function close(modal) {
+    modal.classList.remove("modal__opened");
+}
+
+/*--------------------------------------------------------------*/
+/*                       Edit Profile Modal                        */
+/*--------------------------------------------------------------*/
+populateEditForm();
+editProfileForm.addEventListener('submit', handleEditProfileSubmit);
 
 function populateEditForm() {
     // Fill out default values for editProfile popup
@@ -150,12 +160,20 @@ function handleEditProfileSubmit(evt) {
     // corresponding profile elements
     profileName.textContent = newUserName;
     profileJob.textContent = newUserDescription;
-
     // close window on submit
     const modal = evt.target.closest('.modal');
     modal.classList.remove("modal__opened");
 }
 
+// connect the handler to the form to watch the submit event
+profileEditButton.addEventListener("click", () => {
+    const modal = document.querySelector(".modal__edit-profile");
+    modal.classList.add("modal__opened");
+}); 
+
+/*--------------------------------------------------------------*/
+/*                    Add Location Modal                        */
+/*--------------------------------------------------------------*/
 function handleNewLocationSubmit(evt) {
     evt.preventDefault();
 
@@ -175,24 +193,17 @@ function handleNewLocationSubmit(evt) {
     modal.classList.remove("modal__opened");
 }
 
-function addCloseButtonEvents() {
-    modalCloseButtons.forEach((closeButton) => {
-        const modal = closeButton.closest(".modal");
-        closeButton.addEventListener("click", () => {
-            close(modal);
-        });   
-    });
-    closeImageModal.forEach((closeButton) => {
-        const modal = closeButton.closest(".modal");
-        closeButton.addEventListener("click", () => {
-            close(modal);
-        });   
-    });
-}
+profileAddLocationButton.addEventListener("click", () => {
+    const modal = document.querySelector(".modal__new-location");
+    modal.classList.add("modal__opened");
+});
 
-function close(modal) {
-    modal.classList.remove("modal__opened");
-}
+newLocationForm.addEventListener('submit', handleNewLocationSubmit);
+
+/*--------------------------------------------------------------*/
+/*                        Images                                */
+/*--------------------------------------------------------------*/
+addImageEventListeners();
 
 function addImageEventListeners() {
     const images = document.querySelectorAll(".card__image");
@@ -211,4 +222,3 @@ function renderOpenImageModal(src) {
     imageModal.classList.add("modal__opened");
 }
 
-addImageEventListeners();
