@@ -44,6 +44,8 @@ const jobInput = document.getElementById("description");
 const modalCloseButtons = document.querySelectorAll(".modal__close-button");
 const closeImageModal = document.querySelectorAll(".modal__image-close");
 
+const outsideModal = document.querySelectorAll(".modal__blocker");
+
 /*--------------------------------------------------------------*/
 /*                       Cards                                  */
 /*--------------------------------------------------------------*/
@@ -116,7 +118,7 @@ function trashCan(card) {
 addCloseButtonEvents();
 
 function addCloseButtonEvents() {
-    modalCloseButtons.forEach((closeButton) => {
+    modalCloseButtons.forEach( closeButton => {
         const modal = closeButton.closest(".modal");
         closeButton.addEventListener("click", () => {
             close(modal);
@@ -162,7 +164,7 @@ function handleEditProfileSubmit(evt) {
     profileJob.textContent = newUserDescription;
     // close window on submit
     const modal = evt.target.closest('.modal');
-    modal.classList.remove("modal__opened");
+    close(modal);
 }
 
 // connect the handler to the form to watch the submit event
@@ -190,7 +192,7 @@ function handleNewLocationSubmit(evt) {
 
     // close window on submit
     const modal = evt.target.closest('.modal');
-    modal.classList.remove("modal__opened");
+    close(modal);
 }
 
 profileAddLocationButton.addEventListener("click", () => {
@@ -222,3 +224,13 @@ function renderOpenImageModal(src) {
     imageModal.classList.add("modal__opened");
 }
 
+closeOutsideClickModal();
+
+function closeOutsideClickModal() {
+    outsideModal.forEach( blocker => {
+        blocker.addEventListener("click", (evt) => {
+            const modal = evt.target.closest('.modal');
+            close(modal)
+        });
+    });
+}

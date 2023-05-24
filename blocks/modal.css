@@ -104,6 +104,17 @@
     height: 258px;
 }
 
+/* close the open modal when click outside of it  */
+.modal__blocker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: ' ';
+    background: rgba(0,0,0,.5);
+}
+
 .modal__heading {
     margin: unset;
     padding: unset;
@@ -174,7 +185,26 @@
 
 .modal__save-button:hover {
     opacity: 60%;
-  }
+}
+
+/* for when the form input is not valid */
+.modal__save-button-disabled {
+    opacity: 60%;
+}
+
+.modal__error-visible {
+    
+}
+
+
+/* For errors */
+.modal__input-type-error {
+    color: red;
+}
+
+.modal__input-error-underscore {
+    border-bottom: 1px solid red;
+}
 
 @media screen and (max-width: 1100px) {
     .modal__close-button {
